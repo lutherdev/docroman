@@ -1,5 +1,3 @@
-// Use Swift language to solve the following programs.
-
 // 1. Given some string. Create a program that will count the number of vowels, consonants, numeric, and other characters from the given string.
 
 let VOWELS: Set<Character> = ["a", "e", "i", "o", "u"]
@@ -47,27 +45,27 @@ for word in words{ //loop through each word
 
 // 2. Create a program the will sort all characters from the given string in ascending order.
 
-
-
 let input = "swift"
-
 var chars = Array(input)
 
 for i in 0..<chars.count {
-    for j in 0..<(chars.count - i - 1) {
-        if chars[j] > chars[j + 1] {
-            // Swap
-            let temp = chars[j]
-            chars[j] = chars[j + 1]
-            chars[j + 1] = temp
+    var minIndex = i
+    for j in (i+1)..<chars.count {
+        if chars[j] < chars[minIndex] {
+            minIndex = j //where the chosen gets stored to
         }
     }
+    // Swap of the last chosen smallest char
+    // from the point of current i swapped with the chosen
+    let temp = chars[i]
+    chars[i] = chars[minIndex] //chosen gets put at the left side
+    chars[minIndex] = temp //the current i getting put at where chosen was
 }
-
-// Step 3: Convert back to string
-let sortedStr = String(chars)
-print("Original: \(input)")
-print("Sorted:   \(sortedStr)")
+var newstr = ""
+for char in chars {
+    newstr.append(char)
+}
+print("Sorted: ", newstr)
 
 // 3. Create a program change the given string into title caps.
 
@@ -85,10 +83,10 @@ for word in wordss {
         } else {
             newWord.append(ch.lowercased()) 
         }
-        index += 1 //ctr to know if its the beginning of the word
+        index += 1 //ctr  to know if its the beginning of the word
     }
     
     result += newWord + " " //append/concatenate all the newWord to the result
 }
 
-print(result)
+print("Title:", result)
