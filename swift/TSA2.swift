@@ -13,31 +13,31 @@ print("v. ", setA.intersection(setC).intersection(setB))
 print("vi. ", setB.subtracting(setA.union(setC)).sorted())
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 func findPoint(_ point: (Int, Int)) -> String{
+
+//create points for the box
 let horizontalBox = (-2, 1) //left to right
 let verticalBox = (1, -2) //up to bottom
-let origin = (0,0)
-let a = point.0
-let b = point.1
-    if (a == origin.0 && b == origin.0){
-        return "is on the origin"
-    }
-    
-    if a == 0 {
-        return "is on the y-axis"
-    } else if b == 0 {
-        return "is on the x-axis"
-    }
-    
-    if (a >= horizontalBox.0 && a <= horizontalBox.1 && b <= verticalBox.0 && b >= verticalBox.1){
-        return "is on the box"
-    } 
-    
-    if b == a || b == -a {
-        return "is on the diagonal line"
-    }
-    
-    else {
-        return "idk where the fuck it is"
+//store the passed argument
+let (a,b) = point
+
+    switch (a,b) {
+        case (0,0):
+            return "is on the origin"
+
+        case (0, _):
+            return "is on the y-axis"
+
+        case (_, 0):
+            return "is on the x-axis"
+
+        case (horizontalBox.0...horizontalBox.1, verticalBox.1...verticalBox.0):
+            return "is on the box"
+
+        case let (x, y) where y == x || y == -x:
+            return "is on the diagonal line"
+
+        default:
+            return "the point is unknown"
     }
 }
 
